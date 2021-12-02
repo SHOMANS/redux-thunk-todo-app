@@ -1,23 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { useDispatch, useSelector } from "react-redux";
+import * as Actions from "./redux/ToDoList/actions";
+import { useEffect } from "react";
+import ToDoItem from "./components/ToDoItem";
+import Form from "./components/Form";
 
 function App() {
+  const data = useSelector((state) => state);
+  const dispatch = useDispatch();
+
+  useEffect(() => dispatch(Actions.showTodos()), []);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Form />
+      {data.ToDoList.todos.map((eliment) => (
+        <ToDoItem eliment={eliment} />
+      ))}
     </div>
   );
 }
