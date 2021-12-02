@@ -4,9 +4,11 @@ import * as Actions from "./redux/ToDoList/actions";
 import { useEffect } from "react";
 import ToDoItem from "./components/ToDoItem";
 import Form from "./components/Form";
+import Error from "./components/Error";
+import Loading from "./components/Loading";
 
 function App() {
-  const data = useSelector((state) => state);
+  const { ToDoList } = useSelector((state) => state);
   const dispatch = useDispatch();
 
   useEffect(() => dispatch(Actions.showTodos()), []);
@@ -14,7 +16,9 @@ function App() {
   return (
     <div className="App">
       <Form />
-      {data.ToDoList.todos.map((eliment) => (
+      {ToDoList.error && <Error error={ToDoList.error} />}
+      {ToDoList.isLoading && <Loading />}
+      {ToDoList.todos.map((eliment) => (
         <ToDoItem eliment={eliment} />
       ))}
     </div>

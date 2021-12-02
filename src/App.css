@@ -32,3 +32,12 @@ form button {
 .todoListItem {
   margin: 10px;
 }
+
+.errorMessage {
+  color: red;
+  background-color: rgb(255, 202, 202);
+}
+
+.loading {
+  background-color: rgb(113, 186, 255);
+}
